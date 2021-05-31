@@ -1,0 +1,41 @@
+main{
+    margin: auto;
+    width: 50%;
+    
+}
+
+#despesa{
+    margin-left: 10px;
+}
+
+#receita{
+    margin-left: 10px;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 14rem;
+    margin-left: 10px;
+  }
+
+.botao{
+    display: inline;
+    margin-left: 1em;
+}
+
+.receita-res{
+    margin-bottom: 2px;
+}
+
+.conteudo-receita{
+    font-size: 1em;
+    text-align: left;
+    color: green;
+}
+
+.conteudo-despesa{
+    font-size: 1em;
+    text-align: left;
+    color: red;
+}
+  
+
