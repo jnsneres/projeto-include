@@ -1,6 +1,6 @@
 <main>
   <p-tabView (onChange)="atualizarGrafico()">
-    <p-tabPanel leftIcon="pi pi-wallet" header="Receitas e Despesas" >
+    <p-tabPanel leftIcon="pi pi-money-bill" header="Receitas e Despesas" >
 
       <p-card
         header="Receitas"
@@ -43,23 +43,34 @@
         </form>
         
       </p-card>
-        
+    </p-tabPanel >
+    <p-tabPanel leftIcon="pi pi-wallet" header="Histórico" >
       <p-card
-      header="Histórico"
+      header="Histórico" class="hist"
       >
-        <div class="receita-res" *ngFor="let receita of receitas">
-          <p-card>
+      <h3>Receitas</h3>
+        <div class="cards" *ngFor="let receita of receitas">
+          <p-card >
             <div class="conteudo-receita">
               
               <p>Receita de: R${{receita.valor_receita}}</p>
             </div>
           </p-card>
         </div>
-        <div class="despesa-res" *ngFor="let despesa of despesas">
-          <p-card>
+        <h3>Despesas</h3>
+        <div class="cards" *ngFor="let despesa of despesas">
+          <p-card >
             <div class="conteudo-despesa">
-              
               <p>Despesa de: R${{despesa.valor_despesa}} gasto em {{despesa.motivo}}</p>
+              <div class="select">
+              <p-selectButton
+                [options]="opcoes"
+                optionLabel="rotulo"
+                optionValue="valor"
+                [(ngModel)]="despesa.situacao"
+                (onChange)="atualizar(tarefa)"
+              ></p-selectButton>
+              </div>
             </div>
           </p-card>
         </div>
@@ -67,7 +78,7 @@
 
     </p-tabPanel>
     <p-tabPanel leftIcon="pi pi-percentage" header="Gráfico" >
-        <p-chart type="doughnut" [data]="dados"></p-chart>
+        <p-chart type="doughnut" [data]="situacao"></p-chart>
     </p-tabPanel>
   </p-tabView>
 </main>

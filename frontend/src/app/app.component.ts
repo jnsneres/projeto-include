@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import{Receita}from './model/receita';
 import{Despesa}from './model/despesa';
 import{ DespesaService } from './despesa.service';
+import{ ReceitaService } from './receita.service';
 
 interface MotivoDespesa {
   nameDespesa: string
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   selectedDespesa: MotivoDespesa;
   descDespesas: MotivoDespesa[];
   
-  constructor(private despesaService: DespesaService){
+  constructor(private despesaService: DespesaService, private receitaService: ReceitaService){
     this.descDespesas = [
       {nameDespesa: 'Comida'},
       {nameDespesa: 'Roupa'},
@@ -35,51 +36,65 @@ export class AppComponent implements OnInit {
 receitas: Receita[] = [];
 despesas: Despesa[] = [];
 
-dados: any;
+
 
 
 ngOnInit(){
   this.despesaService.getColecaoDespesaAtualizada().subscribe(despesas => {
     this.despesas = despesas;
     this.atualizarGrafico();
-  });
 
-  this.despesaService.list();
+  });
+  this.receitaService.getColecaoReceitaAtualizada().subscribe(receitas => {
+    this.receitas = receitas;
+    this.atualizarGrafico();
+  });
+  this.despesaService.listDespesa();
+  this.receitaService.listReceita();
 }
 
+atualizar (despesa: Despesa){
+  this.despesaService.updateDespesa(despesa);
+}
+situacao: any;
+opcoes = [
+  {rotulo: "Em aberto", valor: false},
+  {rotulo: "Pago", valor: true}
+  ]
+
+
 atualizarGrafico(){
-  
-  this.dados={
-    labels:['Comida', 'Roupa', 'Gastos Mensais', 'Entretenimento', 'Transporte'],
-    datasets:[
-      {
-        data:[1,3,4,5,6],
-        backgroundColor:[
-          'red',
-          'green',
-          'blue',
-          'yellow',
-          'orange',
-        ]
-      }
-    ]
-  }
+const pagas = this.despesas.filter(d => d.situacao).length;
+const emAberto = this.despesas.length - pagas;
+this.situacao = {
+  labels: ["Pago", "Em aberto"],
+  datasets: [
+    {
+      data:[pagas, emAberto], 
+      backgroundColor: [
+      '#2196F3', 
+      '#F44336', 
+      ]
+    }
+  ]
+}
 }
 
 entrar(receitaForm){
    const r: Receita={
      valor_receita: receitaForm.value.receita
    }
-   this.receitas.push(r);
+   this.receitaService.addReceita(r);
    receitaForm.resetForm();
  }
 
 sair(despesaForm){
     const d: Despesa={
       valor_despesa: despesaForm.value.despesa,
-      motivo: despesaForm.value.motivo.nameDespesa
+      motivo: despesaForm.value.motivo.nameDespesa,
+      situacao: false
     }
-    this.despesas.push(d);
+    this.despesaService.addDespesa(d);
    despesaForm.resetForm();
  }
 

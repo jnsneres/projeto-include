@@ -22,8 +22,8 @@ main{
     margin-left: 1em;
 }
 
-.receita-res{
-    margin-bottom: 2px;
+.cards{
+    margin: 1em;
 }
 
 .conteudo-receita{
@@ -36,6 +36,11 @@ main{
     font-size: 1em;
     text-align: left;
     color: red;
+}
+
+.select{
+    text-align: right;
+    display: inline;
 }
   
 

@@ -16,11 +16,21 @@ export class DespesaService {
     return this.colecaoDespesaAtualizada.asObservable();
   }
 
-  public list(){
+  public listDespesa(){
     this.httpClient.get<{despesas: Despesa[]}>(this.baseURL).subscribe(resultadoDespesa => {
       this.colecaoDespesaAtualizada.next(resultadoDespesa.despesas)
     });
     }
 
-  
+  public addDespesa(despesa: Despesa){
+    this.httpClient.post<{despesas: Despesa[]}>(this.baseURL, despesa).subscribe(resultadoDespesa => {
+      this.colecaoDespesaAtualizada.next(resultadoDespesa.despesas)
+    });
+  }
+
+public updateDespesa(despesa: Despesa){
+  this.httpClient.put<{despesas: Despesa[]}>(this.baseURL, despesa).subscribe(resultadoDespesa => {
+  this.colecaoDespesaAtualizada.next(resultadoDespesa.despesas)
+  });
+}
 }

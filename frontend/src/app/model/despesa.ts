@@ -1,5 +1,6 @@
 export class Despesa {
-    id?:number;
-    valor_despesa:any;
+    id_despesa?:number;
+    valor_despesa:number;
     motivo:String;
+    situacao:boolean;
 }

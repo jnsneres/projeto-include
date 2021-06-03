@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { ChartModule } from 'primeng/chart';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ChartModule,
     HttpClientModule,
+    SelectButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
