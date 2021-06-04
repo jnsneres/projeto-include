@@ -56,6 +56,7 @@ ngOnInit(){
 atualizar (despesa: Despesa){
   this.despesaService.updateDespesa(despesa);
 }
+
 situacao: any;
 opcoes = [
   {rotulo: "Em aberto", valor: false},

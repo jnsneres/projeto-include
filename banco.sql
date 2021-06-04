@@ -16,3 +16,5 @@ CREATE TABLE tb_receita(
 
 SELECT * FROM tb_receita;
 SELECT * FROM tb_despesa;
+
+delete from tb_despesa wher

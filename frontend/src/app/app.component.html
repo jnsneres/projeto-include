@@ -1,75 +1,60 @@
 <main>
   <p-tabView (onChange)="atualizarGrafico()">
-    <p-tabPanel leftIcon="pi pi-money-bill" header="Receitas e Despesas" >
+    <p-tabPanel leftIcon="pi pi-money-bill" header="Receitas e Despesas">
 
-      <p-card
-        header="Receitas"
-        subheader="Maio-2021"
-        >
-          <form #receitaForm="ngForm" (ngSubmit)="entrar(receitaForm)">
-            <label for="receita">Valor da receita:</label>
-            <p-inputNumber id="receita" [(ngModel)]="valorReceita" mode="currency" 
-            currency="USD" locale="en-US" placeholder="$0.00"
-            name="receita" ngModel></p-inputNumber>
+      <p-card header="Receitas" subheader="Maio-2021">
+        <form #receitaForm="ngForm" (ngSubmit)="entrar(receitaForm)">
+          <label for="receita">Valor da receita:</label>
+          <p-inputNumber id="receita" [(ngModel)]="valorReceita" mode="currency" currency="USD" locale="en-US"
+            placeholder="$0.00" name="receita" ngModel></p-inputNumber>
 
-            <span class="botao">
+          <span class="botao">
             <button pButton type="submit" class="p-button-raised p-button-rounded" icon="pi pi-check"></button>
-            </span>
-
-          </form>
-
-        </p-card>
-    
-      <p-card
-        header="Despesas"
-        subheader="Maio-2021"
-        >
-
-        <form #despesaForm="ngForm" (ngSubmit)="sair(despesaForm)">
-            <label for="despesa">Valor da despesa:</label>
-            <p-inputNumber id="despesa" [(ngModel)]="valorDespesa" mode="currency" 
-            currency="USD" locale="en-US" placeholder="$0.00"
-            name="despesa" ngModel></p-inputNumber>
-
-            <p-dropdown id="motivo"  [options]="descDespesas" [(ngModel)]="selectedDespesa" placeholder="Motivo" optionLabel="nameDespesa"
-            name="motivo"></p-dropdown>
-
-            <span class="botao">
-              <button pButton type="submit" class="p-button-raised p-button-rounded" icon="pi pi-check"></button>
-            </span>
-
-            
+          </span>
 
         </form>
-        
+
       </p-card>
-    </p-tabPanel >
-    <p-tabPanel leftIcon="pi pi-wallet" header="Histórico" >
-      <p-card
-      header="Histórico" class="hist"
-      >
-      <h3>Receitas</h3>
+
+      <p-card header="Despesas" subheader="Maio-2021">
+
+        <form #despesaForm="ngForm" (ngSubmit)="sair(despesaForm)">
+          <label for="despesa">Valor da despesa:</label>
+          <p-inputNumber id="despesa" [(ngModel)]="valorDespesa" mode="currency" currency="USD" locale="en-US"
+            placeholder="$0.00" name="despesa" ngModel></p-inputNumber>
+
+          <p-dropdown id="motivo" [options]="descDespesas" [(ngModel)]="selectedDespesa" placeholder="Motivo"
+            optionLabel="nameDespesa" name="motivo"></p-dropdown>
+
+          <span class="botao">
+            <button pButton type="submit" class="p-button-raised p-button-rounded" icon="pi pi-check"></button>
+          </span>
+
+
+
+        </form>
+
+      </p-card>
+    </p-tabPanel>
+    <p-tabPanel leftIcon="pi pi-wallet" header="Histórico">
+      <p-card header="Histórico" class="hist">
+        <h3>Receitas</h3>
         <div class="cards" *ngFor="let receita of receitas">
-          <p-card >
+          <p-card>
             <div class="conteudo-receita">
-              
+
               <p>Receita de: R${{receita.valor_receita}}</p>
             </div>
           </p-card>
         </div>
         <h3>Despesas</h3>
         <div class="cards" *ngFor="let despesa of despesas">
-          <p-card >
+          <p-card>
             <div class="conteudo-despesa">
               <p>Despesa de: R${{despesa.valor_despesa}} gasto em {{despesa.motivo}}</p>
               <div class="select">
-              <p-selectButton
-                [options]="opcoes"
-                optionLabel="rotulo"
-                optionValue="valor"
-                [(ngModel)]="despesa.situacao"
-                (onChange)="atualizar(tarefa)"
-              ></p-selectButton>
+                <p-selectButton [options]="opcoes" optionLabel="rotulo" optionValue="valor"
+                  [(ngModel)]="despesa.situacao" (onChange)="atualizar(despesa)"></p-selectButton>
               </div>
             </div>
           </p-card>
@@ -77,8 +62,8 @@
       </p-card>
 
     </p-tabPanel>
-    <p-tabPanel leftIcon="pi pi-percentage" header="Gráfico" >
-        <p-chart type="doughnut" [data]="situacao"></p-chart>
+    <p-tabPanel leftIcon="pi pi-percentage" header="Gráfico">
+      <p-chart type="doughnut" [data]="situacao"></p-chart>
     </p-tabPanel>
   </p-tabView>
 </main>
