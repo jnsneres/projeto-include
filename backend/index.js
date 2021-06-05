@@ -9,7 +9,7 @@ const db = require('./db');
 const obterDespesa = (req, res) => {
     db.listarDespesa((despesas) => {
     despesas = despesas.map((d) => {
-        return { id_despesa: d.id_despesa, valor_despesa: d.valor_despesa, motivo: d.motivo, situacao: d.situacao };
+        return { id_despesa: d.id_despesa, valor_despesa: d.valor_despesa, motivo: d.motivo, situacao: d.situacao === 1 ? true : false}
     });
     res.json({ despesas });
     })
